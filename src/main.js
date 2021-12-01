@@ -3,7 +3,7 @@ import App from './App.vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faSortAmountUp,
-  faSortAmountDown,
+  faSortAmountDownAlt,
   faSort,
   faFilter,
   faTimes
@@ -17,7 +17,7 @@ import 'v-tooltip/dist/v-tooltip.css'
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 
 
-library.add(faSortAmountUp, faSortAmountDown, faSort, faFilter, faTimes);
+library.add(faSortAmountUp, faSortAmountDownAlt, faSort, faFilter, faTimes);
 
 Vue.use(VTooltipPlugin);
 Vue.use(VueVirtualScroller)

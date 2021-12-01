@@ -1,7 +1,6 @@
 <script lang="jsx">
 import OzTablePaginator from './oz-table-paginator';
 import DotsLoaderIcon from './dost-loader.svg';
-import { orderBy } from 'lodash/collection';
 import FilterDropdown from './filter-dropdown';
 
 export default {
@@ -32,23 +31,6 @@ export default {
       filterText: ''
     };
   },
-  computed: {
-    sortedRows() {
-      let res;
-
-      if (!this.sortProp) {
-        res =  this.rows;
-      }
-
-      res = orderBy(this.rows, [this.sortProp], [this.sortDirection]);
-
-      // if(this.filterText) {
-      //   res = res.filter(row => row[this.filterProp].search(this.filterText) > -1)
-      // }
-
-      return res;
-    }
-  },
   methods: {
     toggleSort(prop) {
       this.sortProp = prop;
@@ -59,7 +41,6 @@ export default {
     },
     openFilterTooltip(prop = '') {
       this.filterProp = prop;
-      // this.filterText = '';
     },
     setFilterText(e) {
       this.filterText = e.target.value;
@@ -71,10 +52,13 @@ export default {
 
       return columnsOptions.map((column) => {
         const renderedTitle = column.scopedSlots.title ? column.scopedSlots.title() : column.title;
-        let sortIcon = 'sort';
+        let sortIcon = 'sort-amount-down-alt';
 
         if (sortProp === column.prop) {
-          sortIcon = sortDirection === 'asc' ? 'times' : 'sort-amount-up';
+          sortIcon = sortDirection === 'asc' ? 'times' : 'sort-amount-down-alt';
+        }
+        if (sortDirection === 'desc' && sortProp === column.prop) {
+          sortIcon = 'times';
         }
 
         return (
@@ -104,7 +88,7 @@ export default {
       });
     },
     renderRows(h, columnsOptions) {
-      return this.sortedRows.map((row, index) => {
+      return this.rows.map((row, index) => {
         return <tr key={row.id || index}>{...this.renderColumns(h, row, columnsOptions)}</tr>;
       });
     },

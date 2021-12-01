@@ -107,13 +107,8 @@ export default {
       }
     },
     async infGetPage() {
-      // this.blockingPromise && await this.blockingPromise;
-      // const res = await fetch(`https://shikimori.one/api/animes?limit=5`);
-      // const newRows = await res.json();
-      // this.rows = [...this.rows, ...newRows];
-      // this.currentPage++;
       this.currentPage++
-      this.blockingPromise;
+      this.blockingPromise && await this.blockingPromise;
       try {
         const urlQuery = [];
 
@@ -154,11 +149,13 @@ export default {
 
     applySort(prop) {
       this.filterParam = '';
+      
       if (this.sortParam !== prop) {
         this.sortParam = prop;
       } else {
         this.sortParam = ''
       }
+
       if (this.staticPaging) {
       this.currentPage = 1;
       } else {
@@ -166,6 +163,7 @@ export default {
       }
       this.arrayOfRowsIds = [];
       this.rows = []
+
       if (this.staticPaging) {
         this.getPage(this.currentPage)
       } else {
@@ -173,15 +171,17 @@ export default {
       }
     },
     applyFilter(prop) {
+      this.sortParam=''
+      this.rows = [];
+      this.arrayOfRowsIds = [];
       this.filterParam = prop;
       console.log(this.filterParam);
+
       if (this.staticPaging) {
         this.currentPage = 1;
         this.getPage(this.currentPage)
       } else {
         this.currentPage = 0;
-        this.rows = [];
-        this.arrayOfRowsIds = [];
         this.infGetPage()
       }
     }
