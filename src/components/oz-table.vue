@@ -23,6 +23,12 @@ export default {
       default: true
     }
   },
+  watch: {
+    staticPaging()
+    {
+      this.sortDirection = ''
+    }
+  },
    data() {
     return {
       sortProp: '',
@@ -41,6 +47,7 @@ export default {
     },
     openFilterTooltip(prop = '') {
       this.filterProp = prop;
+      // this.filterText = '';
     },
     setFilterText(e) {
       this.filterText = e.target.value;
@@ -56,9 +63,6 @@ export default {
 
         if (sortProp === column.prop) {
           sortIcon = sortDirection === 'asc' ? 'times' : 'sort-amount-down-alt';
-        }
-        if (sortDirection === 'desc' && sortProp === column.prop) {
-          sortIcon = 'times';
         }
 
         return (
