@@ -108,7 +108,7 @@ export default {
     },
     async infGetPage() {
       this.currentPage++
-      this.blockingPromise && await this.blockingPromise;
+      this.blockingPromise;
       try {
         const urlQuery = [];
 
