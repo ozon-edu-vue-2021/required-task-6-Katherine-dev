@@ -71,11 +71,12 @@ export default {
       } else {
         this.currentPage = 0;
       }
-      
+      this.filterParam = '';
+      this.sortParam = '';
       if (value) {
         this.getPage(this.currentPage);
       } else {
-        this.infGetPage(this.currentPage)
+        this.infGetPage()
       }
     }
   },
@@ -84,6 +85,7 @@ export default {
       try {
         const urlQuery = [];
         console.log(this.filterParam);
+
         if (this.filterParam) {
           urlQuery.push(`search=${this.filterParam}`)
         }
@@ -114,8 +116,12 @@ export default {
       this.blockingPromise;
       try {
         const urlQuery = [];
-        urlQuery.push(`page=${this.currentPage}`)
+
+        if (this.filterParam) {
+          urlQuery.push(`search=${this.filterParam}`)
+        }
         urlQuery.push(`limit=5`)
+        urlQuery.push(`page=${this.currentPage}`)
         
         if (this.sortParam) {
           urlQuery.push(`order=${this.sortParam}`)
@@ -167,10 +173,17 @@ export default {
       }
     },
     applyFilter(prop) {
-      this.currentPage = 1;
       this.filterParam = prop;
       console.log(this.filterParam);
-      this.getPage(this.currentPage)
+      if (this.staticPaging) {
+        this.currentPage = 1;
+        this.getPage(this.currentPage)
+      } else {
+        this.currentPage = 0;
+        this.rows = [];
+        this.arrayOfRowsIds = [];
+        this.infGetPage()
+      }
     }
   }
 };

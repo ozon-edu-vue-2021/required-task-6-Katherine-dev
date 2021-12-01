@@ -51,11 +51,6 @@ export default {
 </script>
 
 <style module>
-  .filterIcon {
-    margin-left: auto;
-    margin-right: 8px;
-  }
-
   .filterIcon:hover {
     cursor: pointer;
   }
