@@ -53,7 +53,7 @@ export default {
       currentPage: 1,
       sortParam: '',
       filterParam: '',
-      staticPaging: false,
+      staticPaging: true,
       arrayOfRowsIds: []
     };
   },
