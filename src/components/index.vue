@@ -84,7 +84,6 @@ export default {
     async getPage(pageNumber) {
       try {
         const urlQuery = [];
-        console.log(this.filterParam);
 
         if (this.filterParam) {
           urlQuery.push(`search=${this.filterParam}`)
@@ -136,7 +135,6 @@ export default {
           return acc
         }, { elements: [], ids: [] });
         
-        console.log(newRows);
         if (newRows) {
           this.rows = [...this.rows, ...newRows.elements];
           this.arrayOfRowsIds= [...this.arrayOfRowsIds, ...newRows.ids];
@@ -175,7 +173,6 @@ export default {
       this.rows = [];
       this.arrayOfRowsIds = [];
       this.filterParam = prop;
-      console.log(this.filterParam);
 
       if (this.staticPaging) {
         this.currentPage = 1;

@@ -27,6 +27,15 @@ export default {
     staticPaging()
     {
       this.sortDirection = ''
+    },
+    sortProp(newVal, oldVal) {
+      if (newVal !== oldVal) {
+        this.sortDirection = 'asc'
+      }
+    },
+    filterText() {
+      this.sortDirection = ''
+      this.sortProp = ''
     }
   },
    data() {
@@ -40,19 +49,17 @@ export default {
   methods: {
     toggleSort(prop) {
       this.sortProp = prop;
-      this.sortDirection = (this.sortDirection === 'desc' || !this.sortDirection) ? 'asc' : 'desc';
+      this.sortDirection = (this.sortDirection === 'none' || !this.sortDirection) ? 'asc' : 'none';
       this.$emit("applySort", prop)
-      console.log('sort');
       this.filterText = '';
     },
     openFilterTooltip(prop = '') {
       this.filterProp = prop;
-      // this.filterText = '';
     },
     setFilterText(e) {
       this.filterText = e.target.value;
+      this.sortDirection = 'asc'
       this.$emit("applyFilter", e.target.value)
-      console.log('filter', e.target.value);
     },
     renderHead(h, columnsOptions) {
       const { $style, sortProp, sortDirection, filterProp, filterText } = this;
